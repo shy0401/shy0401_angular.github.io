@@ -1,0 +1,29 @@
+.movie-search {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 20px 0;
+}
+
+.movie-search-input {
+  width: 60%;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.movie-search-button {
+  margin-left: 10px;
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #2069ff;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.movie-search-button:hover {
+  background-color: #1056c9;
+}

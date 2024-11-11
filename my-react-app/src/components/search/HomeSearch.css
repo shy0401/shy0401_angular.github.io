@@ -1,0 +1,15 @@
+/* 기본 스타일 */
+.container-search {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+}
+
+.container-search-bar {
+  margin-bottom: 20px;
+}
+
+.content-search {
+  display: flex;
+  flex-wrap: wrap;
+}
