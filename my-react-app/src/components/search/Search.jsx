@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import MovieSearch from './MovieSearch'; // 경로 수정
-import MovieInfiniteScroll from '../views/movie/MovieInfiniteScroll/MovieInfiniteScroll'; // 경로 수정
-import './MovieSearch.css'; // HomeSearch.css가 아니라 MovieSearch.css로 대체
+import MovieSearch from './MovieSearch'; // Adjusted path if necessary
+import MovieInfiniteScroll from '../views/movie/MovieInfiniteScroll/MovieInfiniteScroll'; // Adjusted path if necessary
+import './HomeSearch.css'; // Changed back to match the Angular `HomeSearch.css`
 
 const HomeSearch = () => {
   const [apiKey] = useState(localStorage.getItem('TMDb-Key') || '');

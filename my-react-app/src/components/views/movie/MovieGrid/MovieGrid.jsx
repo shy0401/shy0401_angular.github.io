@@ -8,7 +8,6 @@ const MovieGrid = ({ fetchUrl }) => {
   const [rowSize, setRowSize] = useState(4);
   const [moviesPerPage, setMoviesPerPage] = useState(20);
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
-  const [currentView, setCurrentView] = useState('grid');
 
   useEffect(() => {
     fetchMovies();
@@ -23,18 +22,8 @@ const MovieGrid = ({ fetchUrl }) => {
 
   const fetchMovies = async () => {
     try {
-      const totalMoviesNeeded = 120;
-      const numberOfPages = Math.ceil(totalMoviesNeeded / 20);
-      let allMovies = [];
-
-      for (let page = 1; page <= numberOfPages; page++) {
-        const response = await axios.get(fetchUrl, {
-          params: { page, per_page: moviesPerPage },
-        });
-        allMovies = [...allMovies, ...response.data.results];
-      }
-
-      setMovies(allMovies.slice(0, totalMoviesNeeded));
+      const response = await axios.get(fetchUrl);
+      setMovies(response.data.results || []);
     } catch (error) {
       console.error('Error fetching movies:', error);
     }
@@ -42,46 +31,30 @@ const MovieGrid = ({ fetchUrl }) => {
 
   const calculateLayout = useCallback(() => {
     const containerWidth = window.innerWidth;
-    const containerHeight = window.innerHeight - 50; // Adjust based on container height
     const movieCardWidth = isMobile ? 90 : 200;
-    const movieCardHeight = isMobile ? 150 : 220;
     const horizontalGap = isMobile ? 10 : 15;
-    const verticalGap = -10;
 
     setRowSize(Math.floor(containerWidth / (movieCardWidth + horizontalGap)));
-    const maxRows = Math.floor(containerHeight / (movieCardHeight + verticalGap));
-    setMoviesPerPage(rowSize * maxRows);
-  }, [isMobile, rowSize]);
+  }, [isMobile]);
 
-  const visibleMovieGroups = () => {
+  const visibleMovies = () => {
     const startIndex = (currentPage - 1) * moviesPerPage;
     const endIndex = startIndex + moviesPerPage;
-    const paginatedMovies = movies.slice(startIndex, endIndex);
-
-    return paginatedMovies.reduce((resultArray, item, index) => {
-      const groupIndex = Math.floor(index / rowSize);
-      if (!resultArray[groupIndex]) {
-        resultArray[groupIndex] = [];
-      }
-      resultArray[groupIndex].push(item);
-      return resultArray;
-    }, []);
+    return movies.slice(startIndex, endIndex);
   };
 
   return (
     <div className="movie-grid">
-      <div className={`grid-container ${currentView}`}>
-        {visibleMovieGroups().map((movieGroup, i) => (
-          <div
-            key={i}
-            className={`movie-row ${movieGroup.length === rowSize ? 'full' : ''}`}
-          >
-            {movieGroup.map((movie) => (
-              <div key={movie.id} className="movie-card">
-                <img src={`https://image.tmdb.org/t/p/w300${movie.poster_path}`} alt={movie.title} />
-                <div className="movie-title">{movie.title}</div>
-              </div>
-            ))}
+      <div className="grid-container">
+        {visibleMovies().map((movie, index) => (
+          <div key={movie.id} className="movie-card">
+            <div className="movie-rank">{index + 1}</div>
+            <img
+              className="movie-poster"
+              src={`https://image.tmdb.org/t/p/w300${movie.poster_path}`}
+              alt={movie.title}
+            />
+            <div className="movie-title">{movie.title}</div>
           </div>
         ))}
       </div>

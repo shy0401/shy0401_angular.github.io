@@ -1,53 +1,50 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import axios from 'axios';
-import './MovieRow.css';
 
 const MovieRow = ({ title, fetchUrl }) => {
+  const gridContainerRef = useRef(null); // 컨테이너 참조
   const [movies, setMovies] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
 
+  // 데이터 가져오기
   useEffect(() => {
-    const fetchMovies = async () => {
+    const fetchData = async () => {
       try {
         const response = await axios.get(fetchUrl);
-        setMovies(response.data.results || []);
-      } catch (err) {
-        console.error(`Error fetching movies for ${title}:`, err);
-        setError('Failed to load movies.');
-      } finally {
-        setLoading(false);
+        setMovies(response.data.results);
+      } catch (error) {
+        console.error('Error fetching movies:', error);
       }
     };
 
-    if (fetchUrl) {
-      fetchMovies();
-    }
+    fetchData();
   }, [fetchUrl]);
 
-  if (loading) {
-    return <p>Loading {title}...</p>;
-  }
+  // 화면 크기 변경 시 모바일 여부 업데이트
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
 
-  if (error) {
-    return <p className="error">{error}</p>;
-  }
+    window.addEventListener('resize', handleResize);
 
-  if (!movies || movies.length === 0) {
-    return <p>No movies available for {title}.</p>;
-  }
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
 
   return (
-    <div className="movie-row">
+    <div className="movie-row" ref={gridContainerRef}>
       <h2>{title}</h2>
-      <div className="movie-row__posters">
+      <div className={`movie-row__list ${isMobile ? 'mobile' : ''}`}>
         {movies.map((movie) => (
-          <img
-            key={movie.id}
-            className="movie-row__poster"
-            src={`https://image.tmdb.org/t/p/w200${movie.poster_path}`}
-            alt={movie.title}
-          />
+          <div key={movie.id} className="movie-row__item">
+            <img
+              src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+              alt={movie.title}
+            />
+            <div className="movie-row__title">{movie.title}</div>
+          </div>
         ))}
       </div>
     </div>

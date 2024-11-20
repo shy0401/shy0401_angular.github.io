@@ -1,26 +1,57 @@
 .movie-grid {
-  display: flex;
-  flex-direction: column;
+  padding: 20px;
 }
 
 .grid-container {
   display: flex;
   flex-wrap: wrap;
-  gap: 16px;
-}
-
-.movie-row {
-  display: flex;
-  width: 100%;
+  gap: 15px;
+  justify-content: center;
 }
 
 .movie-card {
-  flex: 1;
-  margin: 10px;
+  position: relative;
+  width: 200px;
+  transition: transform 0.3s ease;
+}
+
+.movie-card:hover {
+  transform: scale(1.1);
+}
+
+.movie-poster {
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+}
+
+.movie-rank {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background: rgba(0, 0, 0, 0.7);
+  color: #fff;
+  padding: 5px 10px;
+  border-radius: 50%;
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+.movie-title {
+  margin-top: 10px;
+  text-align: center;
+  font-size: 1rem;
+  color: #333;
 }
 
 .pagination {
-  display: flex;
-  justify-content: center;
-  margin: 20px 0;
+  margin-top: 20px;
+  text-align: center;
+}
+
+.pagination button {
+  margin: 0 10px;
+  padding: 5px 10px;
+  font-size: 1rem;
+  cursor: pointer;
 }

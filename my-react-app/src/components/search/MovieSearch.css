@@ -1,29 +1,76 @@
-.movie-search {
+.dropdown-container {
+  margin-top: 0;
   display: flex;
-  justify-content: center;
   align-items: center;
-  margin: 20px 0;
+  gap: 15px;
 }
 
-.movie-search-input {
-  width: 60%;
+.custom-select {
+  min-width: 120px;
+  position: relative;
+  display: inline-block;
+}
+
+.select-selected {
+  background-color: black;
+  color: white;
   padding: 10px;
+  border: 1px solid #fff;
   font-size: 16px;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-}
-
-.movie-search-button {
-  margin-left: 10px;
-  padding: 10px 20px;
-  font-size: 16px;
-  background-color: #2069ff;
-  color: #fff;
-  border: none;
-  border-radius: 4px;
   cursor: pointer;
 }
 
-.movie-search-button:hover {
-  background-color: #1056c9;
+.select-items {
+  display: block;
+  position: absolute;
+  background-color: #333;
+  border: 1px solid #fff;
+  z-index: 99;
+  top: 100%;
+  left: 0;
+  right: 0;
+}
+
+.select-items div {
+  color: white;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.select-items div:hover {
+  background-color: #575757;
+}
+
+.select-arrow-active:after {
+  content: "\25B2";
+  position: absolute;
+  right: 10px;
+  top: 14px;
+}
+
+.select-selected:after {
+  content: "\25BC";
+  position: absolute;
+  right: 10px;
+  top: 14px;
+}
+
+.select-selected.select-arrow-active:after {
+  content: "\25B2";
+}
+
+.clear-options {
+  min-width: 120px;
+  background-color: black;
+  color: white;
+  padding: 10px;
+  border: 1px solid #fff;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  border-radius: 0 !important;
+}
+
+.clear-options:hover {
+  background-color: #333;
 }
