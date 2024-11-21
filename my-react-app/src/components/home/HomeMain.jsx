@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSpinner, faStar } from '@fortawesome/free-solid-svg-icons';
-import { BrowserRouter as Router, Route, Routes, useNavigate } from 'react-router-dom';
+import { faSpinner } from '@fortawesome/free-solid-svg-icons';
 import Banner from '../Banner';
-import MovieRow from '../views/movie/MovieRow';
+import MovieGrid from '../views/movie/MovieGrid/MovieGrid';
 import {
   getURL4PopularMovies,
   getURL4ReleaseMovies,
@@ -19,11 +18,8 @@ const HomeMain = () => {
   const [actionMoviesUrl, setActionMoviesUrl] = useState('');
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [recommendedMovies, setRecommendedMovies] = useState(
-    JSON.parse(localStorage.getItem('recommendedMovies')) || []
-  );
 
-  const apiKey = localStorage.getItem('TMDb-Key') || '3b69d346c90eb9c0833ba5bf46603608'; // Use default API key if not present
+  const apiKey = localStorage.getItem('TMDb-Key') || '3b69d346c90eb9c0833ba5bf46603608';
 
   useEffect(() => {
     if (!apiKey) {
@@ -54,15 +50,6 @@ const HomeMain = () => {
     loadFeaturedMovie();
   }, [apiKey]);
 
-  const toggleRecommendation = (movie) => {
-    const updatedRecommendations = recommendedMovies.some((m) => m.id === movie.id)
-      ? recommendedMovies.filter((m) => m.id !== movie.id)
-      : [...recommendedMovies, movie];
-
-    setRecommendedMovies(updatedRecommendations);
-    localStorage.setItem('recommendedMovies', JSON.stringify(updatedRecommendations));
-  };
-
   if (loading) {
     return (
       <div className="loading">
@@ -78,24 +65,18 @@ const HomeMain = () => {
   return (
     <div className="home-main">
       <Banner movie={featuredMovie} />
-      <MovieRow
-        title="인기 영화"
-        fetchUrl={popularMoviesUrl}
-        onMovieClick={toggleRecommendation}
-        recommendedMovies={recommendedMovies}
-      />
-      <MovieRow
-        title="최신 영화"
-        fetchUrl={newReleasesUrl}
-        onMovieClick={toggleRecommendation}
-        recommendedMovies={recommendedMovies}
-      />
-      <MovieRow
-        title="액션 영화"
-        fetchUrl={actionMoviesUrl}
-        onMovieClick={toggleRecommendation}
-        recommendedMovies={recommendedMovies}
-      />
+      <div className="section">
+        <h2>인기 영화</h2>
+        <MovieGrid fetchUrl={popularMoviesUrl} />
+      </div>
+      <div className="section">
+        <h2>최신 영화</h2>
+        <MovieGrid fetchUrl={newReleasesUrl} />
+      </div>
+      <div className="section">
+        <h2>액션 영화</h2>
+        <MovieGrid fetchUrl={actionMoviesUrl} />
+      </div>
     </div>
   );
 };
