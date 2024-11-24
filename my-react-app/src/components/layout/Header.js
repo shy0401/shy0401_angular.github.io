@@ -1,8 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSearch, faUser, faTicket, faBars, faTimes } from "@fortawesome/free-solid-svg-icons";
-import "./Header.css"; // Ensure Header.css is correctly located
+import {
+  faSearch,
+  faUser,
+  faTicket,
+  faBars,
+  faTimes,
+  faSignOutAlt,
+} from "@fortawesome/free-solid-svg-icons";
+import "./Header.css";
 
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -17,7 +24,7 @@ const Header = () => {
 
     window.addEventListener("scroll", handleScroll);
 
-    // 로그인 상태 확인
+    // Check login status
     const apiKey = sessionStorage.getItem("loggedInApiKey");
     setIsLoggedIn(!!apiKey);
 
@@ -32,24 +39,25 @@ const Header = () => {
 
   const handleProfileClick = () => {
     if (isLoggedIn) {
-      navigate("/profile"); // Navigate to the profile page if logged in
+      navigate("/profile");
     } else {
-      navigate("/signin"); // Navigate to the sign-in page if not logged in
+      navigate("/signin");
     }
   };
 
   const handleLogout = () => {
-    sessionStorage.removeItem("loggedInApiKey"); // Remove API key from session storage
-    localStorage.removeItem("TMDb-Key"); // Optional: Remove API key from local storage
-    setIsLoggedIn(false); // Update login state
-    navigate("/signin"); // Redirect to sign-in page
+    sessionStorage.removeItem("loggedInApiKey");
+    localStorage.removeItem("TMDb-Key");
+    setIsLoggedIn(false);
+    navigate("/signin");
   };
 
   return (
     <header className={`app-header ${isScrolled ? "scrolled" : ""}`}>
       <div className="header-left">
         <Link to="/" className="logo">
-          <FontAwesomeIcon icon={faTicket} style={{ color: "#E50914" }} />
+          <FontAwesomeIcon icon={faTicket} className="logo-icon" />
+          <span>MovieApp</span>
         </Link>
         <nav className="nav-links desktop-nav">
           <ul>
@@ -69,18 +77,18 @@ const Header = () => {
         </nav>
       </div>
       <div className="header-right">
-        {isLoggedIn ? (
-          <>
-            <button className="icon-button" onClick={handleLogout}>
-              로그아웃
-            </button>
-          </>
-        ) : (
-          <button className="icon-button" onClick={handleProfileClick}>
-            <FontAwesomeIcon icon={faUser} />
+        <button className="icon-button" onClick={handleProfileClick}>
+          <FontAwesomeIcon icon={faUser} />
+        </button>
+        {isLoggedIn && (
+          <button className="icon-button logout-button" onClick={handleLogout}>
+            <FontAwesomeIcon icon={faSignOutAlt} />
           </button>
         )}
-        <button className="icon-button mobile-menu-button" onClick={toggleMobileMenu}>
+        <button
+          className="icon-button mobile-menu-button"
+          onClick={toggleMobileMenu}
+        >
           <FontAwesomeIcon icon={faBars} />
         </button>
       </div>

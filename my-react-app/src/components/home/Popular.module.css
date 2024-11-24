@@ -1,0 +1,121 @@
+.popularPage {
+  padding: 20px;
+  background-color: #141414;
+  color: white;
+  position: relative;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.viewModeToggle {
+  display: flex;
+  gap: 10px;
+}
+
+.toggleButton {
+  padding: 10px 20px;
+  background-color: #333;
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+.toggleButton.active {
+  background-color: #ff9f43;
+  color: black;
+}
+
+.movieGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 20px;
+}
+
+.movieCard {
+  background-color: #1e1e1e;
+  border-radius: 10px;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+}
+
+.movieCard:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.7);
+}
+
+.poster {
+  width: 100%;
+  height: auto;
+}
+
+.movieInfo {
+  padding: 10px;
+  text-align: center;
+}
+
+.movieTitle {
+  font-size: 1rem;
+  margin: 5px 0;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.rating {
+  color: #ff9f43;
+  font-size: 0.9rem;
+}
+
+.tableView {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: #1e1e1e;
+}
+
+.tableView th,
+.tableView td {
+  padding: 10px;
+  text-align: center;
+  border: 1px solid #333;
+}
+
+.tableView th {
+  background-color: #333;
+  color: white;
+}
+
+.posterSmall {
+  width: 50px;
+  height: auto;
+  border-radius: 5px;
+}
+
+.loading {
+  text-align: center;
+  margin: 20px 0;
+}
+
+.scrollToTopButton {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: #333;
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.scrollToTopButton:hover {
+  background-color: #ff9f43;
+}

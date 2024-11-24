@@ -4,6 +4,7 @@ import ToastContainer from "./components/Toast/ToastContainer"; // ToastContaine
 import Home from "./components/home/HomeMain";
 import Search from "./components/search/HomeSearch";
 import SignIn from "./components/Signin/Signin";
+import Popular from "./components/home/Popular"; // Popular 페이지를 추가
 import Header from "./components/layout/Header";
 import MovieWishlist from "./components/home/Wishlist";
 import ProtectedRoute from "./guards/AuthGuard";
@@ -17,6 +18,9 @@ const App = () => {
         <Routes>
           {/* 메인 페이지는 로그인 없이 접근 가능 */}
           <Route path="/" element={<Home />} />
+
+          {/* 인기 영화 페이지 */}
+          <Route path="/popular" element={<Popular />} />
 
           {/* 인증이 필요한 페이지 */}
           <Route
