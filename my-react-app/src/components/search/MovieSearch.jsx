@@ -1,17 +1,17 @@
-import React, { useState } from "react";
-import "./MovieSearch.css";
+import React, { useState } from 'react';
+import './MovieSearch.css';
 
 const MovieSearch = ({ changeOptions }) => {
   const dropdowns = {
-    originalLanguage: ["장르 (전체)", "Action", "Adventure", "Comedy", "Crime", "Family"],
-    translationLanguage: ["평점 (전체)", "9~10", "8~9", "7~8", "6~7", "5~6", "4~5", "4점 이하"],
-    sorting: ["언어 (전체)", "영어", "한국어"],
+    originalLanguage: ['장르 (전체)', 'Action', 'Adventure', 'Comedy', 'Crime', 'Family'],
+    translationLanguage: ['평점 (전체)', '9~10', '8~9', '7~8', '6~7', '5~6', '4~5', '4점 이하'],
+    sorting: ['언어 (전체)', '영어', '한국어'],
   };
 
   const DEFAULT_OPTIONS = {
-    originalLanguage: "장르 (전체)",
-    translationLanguage: "평점 (전체)",
-    sorting: "언어 (전체)",
+    originalLanguage: '장르 (전체)',
+    translationLanguage: '평점 (전체)',
+    sorting: '언어 (전체)',
   };
 
   const [selectedOptions, setSelectedOptions] = useState({ ...DEFAULT_OPTIONS });
@@ -46,7 +46,9 @@ const MovieSearch = ({ changeOptions }) => {
       {Object.entries(dropdowns).map(([key, options]) => (
         <div className="custom-select" key={key}>
           <div
-            className={`select-selected ${activeDropdown === key ? "select-arrow-active" : ""}`}
+            className={`select-selected ${
+              activeDropdown === key ? 'select-arrow-active' : ''
+            }`}
             onClick={() => toggleDropdown(key)}
           >
             {selectedOptions[key]}

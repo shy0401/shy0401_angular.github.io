@@ -1,9 +1,10 @@
+/* 헤더 스타일 */
 .app-header {
-  height: 40px;
+  height: 60px; /* 고정 헤더 높이 */
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 20px 4%;
+  padding: 0 4%; /* 좌우 간격 */
   background-color: transparent;
   position: fixed;
   top: 0;
@@ -11,11 +12,16 @@
   right: 0;
   z-index: 1000;
   transition: background-color 0.3s ease;
+  box-sizing: border-box;
 }
 
 .app-header:hover,
 .app-header.scrolled {
-  background-color: #141414;
+  background-color: #141414; /* 스크롤 후 배경 */
+}
+
+.body-content {
+  margin-top: 60px; /* 헤더 높이만큼 아래로 */
 }
 
 .header-left,
@@ -25,9 +31,10 @@
 }
 
 .logo {
-  height: 30px;
-  margin-right: 25px;
-  justify-items: center;
+  font-size: 1.5rem;
+  color: #e50914;
+  text-decoration: none;
+  display: flex;
   align-items: center;
 }
 
@@ -45,7 +52,7 @@
 .nav-links a {
   color: #e5e5e5;
   text-decoration: none;
-  font-size: 0.85rem;
+  font-size: 1rem;
   transition: color 0.3s ease;
 }
 
@@ -63,9 +70,10 @@
 }
 
 .icon-button:hover {
-  opacity: 0.5;
+  opacity: 0.8;
 }
 
+/* 반응형 메뉴 */
 .mobile-menu-button {
   display: none;
 }
@@ -87,9 +95,8 @@
 }
 
 .mobile-nav ul {
-  list-style-type: none;
-  padding: 0;
-  margin-top: 60px;
+  list-style: none;
+  margin-top: 80px;
 }
 
 .mobile-nav li {
@@ -100,8 +107,8 @@
   color: #e5e5e5;
   text-decoration: none;
   font-size: 1.2rem;
-  display: block;
   padding: 10px 20px;
+  display: block;
 }
 
 .close-button {
@@ -115,6 +122,7 @@
   cursor: pointer;
 }
 
+/* 반응형 디자인 */
 @media (max-width: 768px) {
   .desktop-nav {
     display: none;
@@ -129,12 +137,6 @@
   }
 
   .icon-button {
-    font-size: 0.75rem;
-    margin-left: 10px;
-  }
-
-  a {
-    text-align: left;
-    font-size: 1.15rem !important;
+    font-size: 0.85rem;
   }
 }
