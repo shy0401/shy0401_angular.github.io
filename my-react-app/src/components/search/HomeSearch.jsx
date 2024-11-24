@@ -8,6 +8,7 @@ const HomeSearch = () => {
   const [selectedGenre, setSelectedGenre] = useState('0');
   const [language, setLanguage] = useState('ko-KR');
   const [voteAverage, setVoteAverage] = useState(0);
+  const [sortBy, setSortBy] = useState('popularity.desc'); // Default: 인기순 내림차순
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
 
@@ -34,8 +35,9 @@ const HomeSearch = () => {
       try {
         const genreParam = selectedGenre !== '0' ? `&with_genres=${selectedGenre}` : '';
         const voteParam = voteAverage > 0 ? `&vote_average.gte=${voteAverage}` : '';
+        const sortParam = sortBy ? `&sort_by=${sortBy}` : '';
         const response = await fetch(
-          `https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}&language=${language}${genreParam}${voteParam}&page=${currentPage}`
+          `https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}&language=${language}${genreParam}${voteParam}${sortParam}&page=${currentPage}`
         );
         const data = await response.json();
         setMovies(data.results || []);
@@ -46,7 +48,7 @@ const HomeSearch = () => {
     };
 
     fetchMovies();
-  }, [apiKey, selectedGenre, language, voteAverage, currentPage]);
+  }, [apiKey, selectedGenre, language, voteAverage, sortBy, currentPage]);
 
   const handlePageChange = (newPage) => {
     if (newPage > 0 && newPage <= totalPages) {
@@ -58,6 +60,7 @@ const HomeSearch = () => {
     setSelectedGenre('0');
     setLanguage('ko-KR');
     setVoteAverage(0);
+    setSortBy('popularity.desc');
     setCurrentPage(1);
   };
 
@@ -95,6 +98,14 @@ const HomeSearch = () => {
           <option value="7">7점 이상</option>
           <option value="6">6점 이상</option>
           <option value="5">5점 이상</option>
+        </select>
+        <select value={sortBy} onChange={(e) => setSortBy(e.target.value)} className={styles.select}>
+          <option value="popularity.desc">인기순 (내림차순)</option>
+          <option value="popularity.asc">인기순 (오름차순)</option>
+          <option value="vote_average.desc">평점 (높은순)</option>
+          <option value="vote_average.asc">평점 (낮은순)</option>
+          <option value="release_date.desc">개봉일 (최신순)</option>
+          <option value="release_date.asc">개봉일 (오래된순)</option>
         </select>
         <select value={language} onChange={(e) => setLanguage(e.target.value)} className={styles.select}>
           <option value="ko-KR">한국어</option>

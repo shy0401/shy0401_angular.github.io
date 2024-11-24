@@ -8,7 +8,7 @@ const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const navigate = useNavigate();
-  const apiKey = localStorage.getItem("TMDb-Key");
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -16,6 +16,10 @@ const Header = () => {
     };
 
     window.addEventListener("scroll", handleScroll);
+
+    // 로그인 상태 확인
+    const apiKey = sessionStorage.getItem("loggedInApiKey");
+    setIsLoggedIn(!!apiKey);
 
     return () => {
       window.removeEventListener("scroll", handleScroll);
@@ -27,11 +31,18 @@ const Header = () => {
   };
 
   const handleProfileClick = () => {
-    if (apiKey) {
+    if (isLoggedIn) {
       navigate("/profile"); // Navigate to the profile page if logged in
     } else {
       navigate("/signin"); // Navigate to the sign-in page if not logged in
     }
+  };
+
+  const handleLogout = () => {
+    sessionStorage.removeItem("loggedInApiKey"); // Remove API key from session storage
+    localStorage.removeItem("TMDb-Key"); // Optional: Remove API key from local storage
+    setIsLoggedIn(false); // Update login state
+    navigate("/signin"); // Redirect to sign-in page
   };
 
   return (
@@ -58,9 +69,17 @@ const Header = () => {
         </nav>
       </div>
       <div className="header-right">
-        <button className="icon-button" onClick={handleProfileClick}>
-          <FontAwesomeIcon icon={faUser} />
-        </button>
+        {isLoggedIn ? (
+          <>
+            <button className="icon-button" onClick={handleLogout}>
+              로그아웃
+            </button>
+          </>
+        ) : (
+          <button className="icon-button" onClick={handleProfileClick}>
+            <FontAwesomeIcon icon={faUser} />
+          </button>
+        )}
         <button className="icon-button mobile-menu-button" onClick={toggleMobileMenu}>
           <FontAwesomeIcon icon={faBars} />
         </button>
@@ -95,6 +114,11 @@ const Header = () => {
             </li>
           </ul>
         </nav>
+        {isLoggedIn && (
+          <button className="icon-button logout-button" onClick={handleLogout}>
+            로그아웃
+          </button>
+        )}
       </div>
     </header>
   );

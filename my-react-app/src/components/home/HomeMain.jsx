@@ -3,11 +3,7 @@ import styles from "./HomeMain.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSpinner } from "@fortawesome/free-solid-svg-icons";
 import Banner from "../Banner";
-import {
-  getURL4PopularMovies,
-  getURL4ReleaseMovies,
-  fetchFeaturedMovie,
-} from "../../utils/urlService";
+import { getURL4PopularMovies, fetchFeaturedMovie } from "../../utils/urlService";
 
 const HomeMain = () => {
   const [featuredMovie, setFeaturedMovie] = useState(null);
@@ -17,7 +13,6 @@ const HomeMain = () => {
 
   const apiKey = localStorage.getItem("TMDb-Key") || "3b69d346c90eb9c0833ba5bf46603608";
 
-  // Fetch featured movie and popular movies
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -30,7 +25,7 @@ const HomeMain = () => {
         }
 
         setFeaturedMovie(featured);
-        setPopularMovies(popularData.results.slice(0, 10)); // Fetch top 10 movies
+        setPopularMovies(popularData.results.slice(0, 10));
       } catch (err) {
         console.error(err);
         setError("Error loading content. Please try again later.");
@@ -41,6 +36,17 @@ const HomeMain = () => {
 
     fetchData();
   }, [apiKey]);
+
+  const addToWishlist = (movie) => {
+    const wishlist = JSON.parse(localStorage.getItem("wishlist") || "[]");
+    if (!wishlist.find((item) => item.id === movie.id)) {
+      wishlist.push(movie);
+      localStorage.setItem("wishlist", JSON.stringify(wishlist));
+      alert(`${movie.title}이(가) 위시리스트에 추가되었습니다.`);
+    } else {
+      alert("이미 위시리스트에 추가된 영화입니다.");
+    }
+  };
 
   if (loading) {
     return (
@@ -60,9 +66,12 @@ const HomeMain = () => {
       <div className={styles.section}>
         <h2>인기 영화</h2>
         <div className={styles.movieGrid}>
-          {popularMovies.map((movie, index) => (
-            <div key={movie.id} className={styles.movieCard}>
-              <div className={styles.rankBadge}>{index + 1}</div>
+          {popularMovies.map((movie) => (
+            <div
+              key={movie.id}
+              className={styles.movieCard}
+              onClick={() => addToWishlist(movie)}
+            >
               <img
                 src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
                 alt={movie.title}
@@ -76,7 +85,6 @@ const HomeMain = () => {
           ))}
         </div>
       </div>
-      {/* 추가 섹션을 여기에 구현 가능 */}
     </div>
   );
 };

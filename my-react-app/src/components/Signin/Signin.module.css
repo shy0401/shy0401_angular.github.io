@@ -1,0 +1,138 @@
+@import url('https://fonts.googleapis.com/css?family=Poppins:400,500,600,700,800,900');
+
+:root {
+  --primary-color: #ffeba7;
+  --secondary-color: #102770;
+  --background-color: #1f2029;
+  --card-background: #2a2b38;
+  --error-color: #ff4d4d;
+}
+
+.signinSection {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+  font-size: 15px;
+  line-height: 1.7;
+  color: #c4c3ca;
+  background-color: var(--background-color);
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 70vh;
+}
+
+.signinContainer {
+  width: 100%;
+  max-width: 600px;
+  padding: 20px;
+  background-color: var(--card-background);
+  border-radius: 10px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+}
+
+.signinTitle {
+  color: var(--primary-color);
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.toggleGroup {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+}
+
+.toggleGroup span {
+  cursor: pointer;
+  padding: 0 10px;
+  color: var(--primary-color);
+  text-transform: uppercase;
+  font-weight: 600;
+  transition: color 0.3s ease;
+}
+
+.toggleGroup span.activeToggle {
+  color: #ffffff;
+}
+
+.toggleGroup span:hover {
+  color: #ffffff;
+}
+
+.signinCardWrap {
+  perspective: 1000px;
+  position: relative;
+}
+
+.signinCardWrapper {
+  width: 100%;
+  transform-style: preserve-3d;
+  transition: transform 0.5s ease-in-out;
+}
+
+.signinCardFront,
+.signinCardBack {
+  width: 100%;
+  height: auto;
+  position: absolute;
+  background: var(--background-color);
+  border-radius: 10px;
+  backface-visibility: hidden;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.signinCardBack {
+  transform: rotateY(180deg);
+}
+
+.flipToBack {
+  transform: rotateY(180deg);
+}
+
+.formGroup {
+  margin-bottom: 1rem;
+}
+
+.inputField {
+  width: 100%;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  background-color: var(--background-color);
+  color: #c4c3ca;
+  box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
+  transition: box-shadow 0.3s ease;
+}
+
+.inputField:focus {
+  outline: none;
+  box-shadow: inset 0 0 5px rgba(255, 235, 167, 0.6);
+}
+
+.submitButton {
+  width: 100%;
+  background: var(--primary-color);
+  color: var(--secondary-color);
+  padding: 12px;
+  border: none;
+  border-radius: 5px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.submitButton:hover {
+  background: var(--secondary-color);
+  color: var(--primary-color);
+}
+
+.errorMessage {
+  color: var(--error-color);
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
+  text-align: center;
+}

@@ -5,7 +5,7 @@
   justify-content: space-between;
   align-items: center;
   padding: 0 4%; /* 좌우 간격 */
-  background-color: transparent;
+  background-color: #102770; /* 기본 배경색 */
   position: fixed;
   top: 0;
   left: 0;
@@ -17,7 +17,7 @@
 
 .app-header:hover,
 .app-header.scrolled {
-  background-color: #141414; /* 스크롤 후 배경 */
+  background-color: #141414; /* 마우스가 올라가거나 스크롤된 후 배경색 */
 }
 
 .body-content {
@@ -31,7 +31,7 @@
 }
 
 .logo {
-  font-size: 1.5rem;
+  font-size: 2rem;
   color: #e50914;
   text-decoration: none;
   display: flex;
@@ -51,6 +51,7 @@
 
 .nav-links a {
   color: #e5e5e5;
+  margin-left: 15px;
   text-decoration: none;
   font-size: 1rem;
   transition: color 0.3s ease;

@@ -1,21 +1,43 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import ToastContainer from "./components/Toast/ToastContainer"; // ToastContainer를 가져옵니다.
 import Home from "./components/home/HomeMain";
 import Search from "./components/search/HomeSearch";
-import SignIn from "./components/signIn/SignIn";
-import Header from "./components/layout/header";
-import MovieWishlist from "./components/views/movie/MovieWishlist"; // 추가
+import SignIn from "./components/Signin/Signin";
+import Header from "./components/layout/Header";
+import MovieWishlist from "./components/home/Wishlist";
+import ProtectedRoute from "./guards/AuthGuard";
 
 const App = () => {
   return (
     <Router>
+      <ToastContainer /> {/* ToastContainer를 최상단에 추가 */}
       <Header />
       <div className="body-content">
         <Routes>
+          {/* 메인 페이지는 로그인 없이 접근 가능 */}
           <Route path="/" element={<Home />} />
-          <Route path="/search" element={<Search />} />
+
+          {/* 인증이 필요한 페이지 */}
+          <Route
+            path="/search"
+            element={
+              <ProtectedRoute>
+                <Search />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/wishlist"
+            element={
+              <ProtectedRoute>
+                <MovieWishlist />
+              </ProtectedRoute>
+            }
+          />
+
+          {/* 로그인 페이지 */}
           <Route path="/signin" element={<SignIn />} />
-          <Route path="/wishlist" element={<MovieWishlist />} /> {/* /wishlist 경로 추가 */}
         </Routes>
       </div>
     </Router>
