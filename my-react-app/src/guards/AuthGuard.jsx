@@ -1,15 +1,20 @@
-import React from 'react';
-import { Navigate } from 'react-router-dom';
+import React from "react";
+import { Navigate } from "react-router-dom";
 
 const ProtectedRoute = ({ children }) => {
-  const storedApiKey = localStorage.getItem('TMDb-Key'); // TMDB API 키 저장 확인
-  const sessionApiKey = sessionStorage.getItem('loggedInApiKey'); // 현재 로그인된 API 키 확인
+  // 사용자 인증 정보 가져오기
+  const storedApiKey = localStorage.getItem("TMDb-Key"); // 로컬 저장소의 API 키
+  const sessionApiKey = sessionStorage.getItem("loggedInApiKey"); // 세션 저장소의 API 키
 
-  if (!storedApiKey || storedApiKey !== sessionApiKey) {
-    // API 키가 저장되어 있지 않거나 일치하지 않을 경우 로그인 페이지로 리다이렉트
+  // 인증 상태 확인
+  const isAuthenticated = storedApiKey && storedApiKey === sessionApiKey;
+
+  if (!isAuthenticated) {
+    // 인증 실패: 로그인 페이지로 리다이렉트
     return <Navigate to="/signin" />;
   }
 
+  // 인증 성공: 자식 컴포넌트 렌더링
   return children;
 };
 

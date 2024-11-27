@@ -2,14 +2,12 @@ import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-  faSearch,
   faUser,
-  faTicket,
   faBars,
   faTimes,
   faSignOutAlt,
 } from "@fortawesome/free-solid-svg-icons";
-import "./Header.css";
+import "./header.css";
 
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -24,9 +22,9 @@ const Header = () => {
 
     window.addEventListener("scroll", handleScroll);
 
-    // Check login status
+    // 로그인 상태 확인
     const apiKey = sessionStorage.getItem("loggedInApiKey");
-    setIsLoggedIn(!!apiKey);
+    setIsLoggedIn(!!apiKey); // API 키가 있으면 로그인 상태로 간주
 
     return () => {
       window.removeEventListener("scroll", handleScroll);
@@ -39,9 +37,9 @@ const Header = () => {
 
   const handleProfileClick = () => {
     if (isLoggedIn) {
-      navigate("/profile");
+      navigate("/profile"); // 로그인 상태에서는 프로필 페이지로 이동
     } else {
-      navigate("/signin");
+      navigate("/signin"); // 비로그인 상태에서는 로그인 페이지로 이동
     }
   };
 
@@ -56,8 +54,19 @@ const Header = () => {
     <header className={`app-header ${isScrolled ? "scrolled" : ""}`}>
       <div className="header-left">
         <Link to="/" className="logo">
-          <FontAwesomeIcon icon={faTicket} className="logo-icon" />
-          <span>MovieApp</span>
+          {/* 로고 이미지 */}
+          <a
+            href="https://icons8.com/icon/EW-7v86RVl2y/cinema-film-play"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <img
+              src="https://img.icons8.com/ios-filled/50/cinema-film-play.png"
+              alt="Cinema Film Play Icon"
+              className="logo-image"
+            />
+          </a>
+          <span className="logo-text">MovieFlix</span>
         </Link>
         <nav className="nav-links desktop-nav">
           <ul>
