@@ -8,6 +8,7 @@ const Signin = () => {
   const [isSignUp, setIsSignUp] = useState(false);
   const [formData, setFormData] = useState({ username: "", password: "", confirmPassword: "" });
   const [error, setError] = useState(null);
+  const [isLoggedIn, setIsLoggedIn] = useState(false); // 로그인 상태 추가
   const navigate = useNavigate();
 
   const getUsers = () => JSON.parse(localStorage.getItem("users") || "[]");
@@ -56,8 +57,10 @@ const Signin = () => {
         const user = tryLogin(username, password);
         localStorage.setItem("TMDb-Key", password);
         sessionStorage.setItem("loggedInApiKey", password);
+        sessionStorage.setItem("loggedInUser", username); // 사용자 정보 저장
+        setIsLoggedIn(true); // 로그인 상태 업데이트
         toast.success(`${user.username}님, 로그인 성공!`);
-        navigate("/");
+        navigate("/profile");
       }
     } catch (err) {
       setError(err.message);
@@ -88,7 +91,6 @@ const Signin = () => {
               isSignUp ? styles.flipToBack : ""
             }`}
           >
-            {/* 로그인 폼 */}
             <div className={styles.signinCardFront}>
               <form onSubmit={handleSubmit}>
                 <h4 className={styles.signinTitle}>로그인</h4>
@@ -118,7 +120,6 @@ const Signin = () => {
                 </button>
               </form>
             </div>
-            {/* 회원가입 폼 */}
             <div className={styles.signinCardBack}>
               <form onSubmit={handleSubmit}>
                 <h4 className={styles.signinTitle}>회원가입</h4>
@@ -160,6 +161,7 @@ const Signin = () => {
             </div>
           </div>
         </div>
+        {isLoggedIn && <p className={styles.loggedInMessage}>현재 로그인 상태입니다.</p>} {/* 로그인 상태 표시 */}
       </div>
     </div>
   );

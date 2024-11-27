@@ -92,7 +92,7 @@ const HomeMain = () => {
     <div className={styles.section}>
       <h2>{title}</h2>
       <div className={styles.movieGrid}>
-        {content.map((movie) => (
+        {content.map((movie, index) => (
           <div
             key={movie.id}
             className={styles.movieCard}
@@ -103,6 +103,9 @@ const HomeMain = () => {
               alt={movie.title}
               className={styles.poster}
             />
+            {index < 10 && (
+              <div className={styles.rankBadge}>{index + 1}</div>
+            )}
             <div className={styles.movieInfo}>
               <h3 className={styles.movieTitle}>{movie.title}</h3>
               <p className={styles.rating}>평점: {movie.vote_average}</p>
@@ -116,7 +119,7 @@ const HomeMain = () => {
   if (loading) {
     return (
       <div className={styles.loading}>
-        <FontAwesomeIcon icon={faSpinner} spin /> Loading...
+        <FontAwesomeIcon icon={faSpinner} spin /> 로딩 중입니다...
       </div>
     );
   }
