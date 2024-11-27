@@ -24,22 +24,7 @@ MovieFix는 넷플릭스와 같은 영화 추천 사이트를 구현한 프로�
 📂 프로젝트 폴더 구조
 
 
-shy0401_angular.github.io/
-├── my-react-app/
-│   ├── build/                  # 빌드된 정적 파일
-│   ├── public/                 # 정적 리소스 파일
-│   ├── src/
-│   │   ├── components/         # 주요 컴포넌트
-│   │   │   ├── home/           # 홈 화면 관련 컴포넌트
-│   │   │   ├── layout/         # 레이아웃 및 공통 UI 컴포넌트 (e.g., Banner.js)
-│   │   │   ├── search/         # 검색 기능 컴포넌트
-│   │   │   ├── services/       # 데이터 관리 서비스 (e.g., WishlistService.js)
-│   │   │   ├── Signin/         # 로그인/회원가입 관련 컴포넌트
-│   │   │   ├── Toast/          # 알림 메시지 컴포넌트
-│   │   │   └── views/          # MovieGrid, MovieInfiniteScroll 등 주요 기능 구현
-│   ├── node_modules/           # 프로젝트 의존성
-│   ├── package.json            # 프로젝트 설정 및 의존성
-│   └── README.md               # 프로젝트 설명 파일
+![image](https://github.com/user-attachments/assets/7391ee9c-7a2a-4b30-a936-bd43c8827c38)
 
 
 
@@ -48,9 +33,8 @@ shy0401_angular.github.io/
 
 1. 프로젝트 클론
    bash
-   git clone https://github.com/your-username/shy0401_angular.github.io.git
+   git clone https://github.com/shy0401/shy0401_angular.github.io
    cd shy0401_angular.github.io/my-react-app
-
 
 2. 의존성 설치
    bash
@@ -64,8 +48,6 @@ shy0401_angular.github.io/
 
 4. 접속
    브라우저에서 [http://localhost:3000](http://localhost:3000)을 열어 MovieFix를 실행합니다.
-
-
 
 ✨ 주요 기능 및 구현
 
@@ -89,12 +71,10 @@ shy0401_angular.github.io/
   - 영화 세부 정보 (평점, 설명 등)
 
 
-
 📈 향후 개선사항
 - 다크 모드: 사용자 설정에 따라 UI 테마 변경
 - 추천 시스템: 개인화된 영화 추천 기능 추가
 - PWA: Progressive Web App 구현을 통해 앱 형태로 사용할 수 있도록 개선
-
 
 
 MovieFix를 사용해 주셔서 감사합니다! 더 나은 프로젝트를 위해 언제든 피드백을 남겨주세요. 😊
