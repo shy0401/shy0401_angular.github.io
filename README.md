@@ -32,11 +32,10 @@ MovieFix는 넷플릭스와 같은 영화 추천 사이트를 구현한 프로�
 🛠 설치 및 실행 가이드
 
 1. 프로젝트 클론
-   bash
    git clone https://github.com/shy0401/shy0401_angular.github.io
    cd shy0401_angular.github.io/my-react-app
 
-2. 의존성 설치
+2. 의존성 설치(/my-react-app 이 위치에서)
    npm install
 
 
