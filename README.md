@@ -37,12 +37,10 @@ MovieFix는 넷플릭스와 같은 영화 추천 사이트를 구현한 프로�
    cd shy0401_angular.github.io/my-react-app
 
 2. 의존성 설치
-   bash
    npm install
 
 
 3. 로컬 서버 실행
-   bash
    npm start
 
 
